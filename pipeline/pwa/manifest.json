@@ -1,0 +1,18 @@
+{
+  "id": "/legend-picks/",
+  "name": "전설로 떠나는 투자자 추천종목",
+  "short_name": "전설 투자자",
+  "description": "전설적인 투자자의 기준으로 미국·한국 주식을 재무제표부터 따져보는 추천 앱",
+  "lang": "ko",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f5f1",
+  "theme_color": "#1f4e3d",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon-192-m.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icon-512-m.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
