@@ -1,0 +1,50 @@
+name: update
+
+# PC가 꺼져 있어도 갱신되도록 GitHub 서버에서 매시간 5분에 무조건 갱신한다 (주식 + 코인).
+# GitHub의 예약 실행은 가끔 건너뛰거나 늦게 시작하지만, 매시간 시도하므로 한 번 빼먹어도 다음 시간에 보충된다.
+on:
+  schedule:
+    - cron: "5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install
+        run: pip install -r pipeline/requirements.txt
+
+      - name: Fetch stocks, fetch coins, build site
+        env:
+          DEPLOY_DIR: ${{ github.workspace }}
+          PYTHONIOENCODING: utf-8
+        working-directory: pipeline
+        run: |
+          python -X utf8 fetch.py --force
+          # 코인(업비트) 수집이 실패해도 주식 갱신은 계속한다(이 경우 코인 화면만 비게 된다)
+          python -X utf8 coin_fetch.py || echo "코인 수집 실패: 코인 화면 없이 주식만 배포합니다"
+          python -X utf8 build.py
+
+      - name: Publish
+        run: |
+          git config user.name "legend-picks-bot"
+          git config user.email "legend-picks-bot@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then echo "변경 없음"; exit 0; fi
+          # 배포 전용 저장소라 기록이 필요 없다: 마지막 커밋을 덮어써서 저장소가 불어나지 않게 한다
+          git commit --amend -q -m "update $(TZ=Asia/Seoul date '+%Y-%m-%d %H:%M') (cloud)"
+          git push --force origin HEAD:main
