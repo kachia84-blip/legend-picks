@@ -1,0 +1,32 @@
+﻿{
+    "buffett":  {
+                    "file":  "img/buffett.jpg",
+                    "license":  "Public domain",
+                    "artist":  "USA International Trade Administration",
+                    "source":  "https://commons.wikimedia.org/wiki/File:Warren_Buffett_at_the_2015_SelectUSA_Investment_Summit_(cropped).jpg"
+                },
+    "graham":  {
+                   "file":  "img/graham.jpg",
+                   "license":  "Public domain",
+                   "artist":  "AnonymousUnknown author",
+                   "source":  "https://commons.wikimedia.org/wiki/File:Benjamin_Graham_(1894-1976)_portrait_on_23_March_1950.jpg"
+               },
+    "munger":  {
+                   "file":  "img/munger.jpg",
+                   "license":  "CC BY 2.0",
+                   "artist":  "Nick",
+                   "source":  "https://commons.wikimedia.org/wiki/File:Charlie_Munger_(cropped).jpg"
+               },
+    "ackman":  {
+                   "file":  "img/ackman.jpg",
+                   "license":  "CC BY 2.0",
+                   "artist":  "Senate Democrats",
+                   "source":  "https://commons.wikimedia.org/wiki/File:Valeant_Pharmaceuticals\u0027_Business_Model_(headshot).jpg"
+               },
+    "wood":  {
+                 "file":  "img/wood.jpg",
+                 "license":  "CC BY-SA 4.0",
+                 "artist":  "Caroline Wood",
+                 "source":  "https://commons.wikimedia.org/wiki/File:Cathie_Wood_ARK_Invest_Photo.jpg"
+             }
+}
