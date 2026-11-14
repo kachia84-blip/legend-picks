@@ -507,6 +507,7 @@ function pickCard(s, i){
     <div class="top"><div><div class="nm">${esc(s.name)}<span class="tk">${esc(tk(s))}</span></div>
       <div class="sub">${subLine(s)}</div></div>${ring(s)}</div>
     <div class="tags"><span class="tag t-${s.tone}">${esc(s.verdict)}</span>${chgBadge(s.ticker)}</div>
+    ${s.total > 0 ? `<div class="vdots" aria-hidden="true">${Array.from({length: s.total}, (_, k) => `<i${k < (s.count ?? 0) ? ' class="on"' : ""}></i>`).join("")}</div>` : ""}
     <div class="tgs">${tagsHtml(s, 3)}</div>${lv}</div>`;
 }
 

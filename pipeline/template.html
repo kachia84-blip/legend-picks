@@ -194,7 +194,7 @@ h2 .sub{font-family:var(--sans)}
 .disc{font-size:13px;color:var(--muted)}.disc b{color:var(--ink)}
 
 /* ── 하단 내비 ── */
-.nav{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--nav);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:30;background:linear-gradient(var(--nav),var(--nav)),var(--bg);/* 블러 대신 불투명(2026-11-14, 발열) */border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
 .nav .in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr)}
 .nav button{border:0;background:none;padding:9px 0 8px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;font-weight:600;color:var(--muted);cursor:pointer;position:relative}
 .nav button[aria-current="page"]{color:var(--green)}
@@ -536,7 +536,7 @@ h2{font-size:22px;font-weight:800;margin:30px 0 14px;letter-spacing:-.035em}
 @media (hover:hover){.pick:hover,.mcard:hover,.row:hover{transform:translateY(-2px)}}
 
 /* ── 상단 앱바: 밝고 얇게 ── */
-.appbar{background:color-mix(in srgb,var(--bg) 82%,transparent);color:var(--ink);backdrop-filter:saturate(1.6) blur(18px);-webkit-backdrop-filter:saturate(1.6) blur(18px);
+.appbar{background:color-mix(in srgb,var(--bg) 96%,transparent);color:var(--ink);/* 블러 뺌(2026-11-14): 스크롤마다 폰 GPU가 뒤 화면을 다시 흐리게 계산해 발열 */
   border-bottom:1px solid transparent;transition:border-color .2s,background .2s}
 .appbar.scrolled{border-bottom-color:var(--line)}
 .appbar .wrap{height:54px}
@@ -696,6 +696,42 @@ h2{font-size:22px;font-weight:800;margin:30px 0 14px;letter-spacing:-.035em}
 .calc-in input{flex:1;min-width:0;font:inherit;font-size:20px;font-weight:800;text-align:right;padding:12px 14px;border:0;border-radius:14px;background:var(--soft);color:var(--ink);letter-spacing:-.03em}
 .calc-in input:focus{outline:2px solid var(--blue)}.calc-in em{font-style:normal;color:var(--muted);font-weight:600}
 #dcalcOut .kv3{margin-top:8px}
+
+/* ═════════ 2026.11 unslop 다듬기: 틀은 조용히, 색은 가격 세 칸과 점수 고리에만 ═════════
+   방향: 침착함·숫자에 정확함·약간 신중함 / 세계: 증권 단말기와 장부 / 시그니처: 거장 투표 점 막대 */
+:root{--spring:cubic-bezier(.2,.8,.2,1)}            /* 튀어 오르는 스프링 대신 부드럽게 멈추는 곡선 하나 */
+body{letter-spacing:0}
+h2{font-weight:600}
+.card h3,.pick .nm,.appbar b,.sh-top h3{font-weight:600}
+.nm2,.seg button,.ic,.nav button,.status,.toast{font-weight:500}
+.lv b,.ring i,.pf-n,.dy b,.calc-in,.calc-in input{font-weight:600}
+.btn{font-weight:600;box-shadow:none}
+.tg,.chg,.sg,.dp,.mbar i,.mc span,.chip[class*="tn-"]{font-weight:500}
+/* 카드 바탕의 색 그라데이션 → 한 가지 흰 면 + 얇은 선. 등급 색은 판정 배지에만 남긴다 */
+.pick[class*="tn-"],.row[class*="tn-"],.mcard[class*="tn-"],.dcard[class*="tn-"],.drow[class*="tn-"]{background:var(--card)}
+.pick,.row,.drow,.icard,.card,.strat,.prof,.panel,.empty{box-shadow:0 0 0 1px var(--line) inset}
+.pick.first{box-shadow:0 0 0 1.5px color-mix(in srgb,var(--ink) 22%,transparent) inset}
+.pick.first .ring i{background:var(--card)}
+.tg{border-color:transparent!important}
+/* 순위 배지: 금·은·동 광택 → 단색. 1위만 진하게 */
+.medal,.medal.m2,.medal.m3{background:var(--soft);color:var(--muted);box-shadow:none;font-weight:600}
+.medal.m1{background:var(--ink);color:var(--card)}
+/* 아바타 광택 그라데이션 → 단색 */
+.ic i,.bk i,.vote .av,.avatar,.pf{background:#3b6fd8}
+.pf.cons,.ic.all i,.avatar.all{background:#d9a226;color:#2b2000}
+.nav{box-shadow:0 -1px 0 var(--line)}
+.nav button[aria-current="page"] svg{transform:none;stroke-width:2}
+.sheet{box-shadow:0 -1px 0 var(--line)}
+.scrim{backdrop-filter:none;-webkit-backdrop-filter:none}
+/* 움직임: 카드가 하나씩 튀어 오르던 등장 효과 제거, 화면 전체만 짧게 나타남 */
+.pick,.row,.drow{animation:none}
+.view{animation:fade .2s ease-out both}
+@media (hover:hover){.pick:hover,.mcard:hover,.row:hover{transform:none;box-shadow:0 0 0 1px color-mix(in srgb,var(--ink) 18%,transparent) inset}}
+.ring{animation-duration:.6s}
+/* 시그니처: 거장 투표 점 막대(추천한 거장 수만큼 채운 점) */
+.vdots{display:flex;flex-wrap:wrap;gap:3px;margin:10px 0 2px}
+.vdots i{width:7px;height:7px;border-radius:50%;background:var(--bar)}
+.vdots i.on{background:var(--ink)}
 </style>
 </head>
 <body>
