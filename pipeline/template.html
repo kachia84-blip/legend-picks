@@ -18,8 +18,8 @@
 (function(){var m="light";try{m=localStorage.getItem("legend-theme")||"light"}catch(e){}
 var t=m==="auto"?(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"):m;document.documentElement.dataset.theme=t;})();
 </script>
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="preload" href="fonts/pretendard.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts/fonts.css">
 <style>
 :root{
   --bg:#f4f1e8; --card:#fffdf8; --ink:#1b1c18; --muted:#6f6d63; --line:#e6e1d2; --soft:#efeadb;
